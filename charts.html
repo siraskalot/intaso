@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Posts</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+
+  <style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: #efefef;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif,
+      'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  a {
+    color: #369;
+  }
+
+  .page {
+    margin: 0 auto;
+    max-width: 640px;
+    padding: 1em 0.5em;
+  }
+
+  .header {
+    background: #111;
+    color: #fff;
+    padding: 0.25em 1em;
+  }
+
+  .mid {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  @media only screen and (min-width: 641px) {
+    .mid {
+      padding: 0 0.5em;
+    }
+  }
+
+  .chart-post {
+    background-color: #fff;
+    color: #555;
+    /* border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 0.25em; */
+    border-bottom: 1px solid #efefef;
+    display: flex;
+    padding: 0.5em;
+    /* transition: all 100ms ease-in-out; */
+  }
+
+    /* .chart-post:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 3px #efefef;
+    } */
+
+  .post {
+    background-color: #fff;
+    color: #555;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 1em;
+    overflow: hidden;
+    font-size: 15px;
+    display: flex;
+  }
+
+  .song__body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .song__title {
+    font-size: 1.125rem;
+    color: #111;
+    margin-bottom: 0.2em;
+  }
+
+  .song__title a {
+  color: #111;
+  text-decoration: none;
+  }
+
+  .song__artist {
+    font-size: 0.875rem;
+    font-weight: normal;
+    color: #111;
+  }
+
+  .avatar {
+    margin-right: 0.5em;
+  }
+
+  .avatar img {
+    display: block;
+    border-radius: 4px;
+    width: 4rem;
+    height: 4rem;
+  }
+
+  /* ol {
+    counter-reset: my-counter;
+  }
+
+  ol li:before {
+    font-size: 2rem;
+    font-weight: bold;
+    background: #111;
+    color: #fff;
+    padding: 0 0.5em;
+    font-family: Georgia, serif;
+  	content: counter(my-counter);
+  	counter-increment: my-counter;
+  } */
+
+.play {
+  text-decoration: none;
+  font-size: 0.875rem;
+  padding: 0 0.25em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 100ms ease-in-out;
+}
+
+.play:hover {
+  transform: scale(1.5);
+}
+
+.play img {
+  height: 1.5rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 3px #ccc;
+}
+
+.input:focus {
+  border-color: #111;
+  border-width: 1px;
+}
+
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <div class="mid">
+    <h1>indie tamil music</h1>
+    <!-- Charts -->
+    </div>
+  </header>
+
+  <main class="page">
+    <!-- <ol>
+      <li class="chart-post">
+        <div class="avatar">
+          <img src="images/artists/rolexrasathy.jpg">
+        </div>
+        <div class="song__body">
+          <h2 class="song__title">
+            Raavanan
+          </h2>
+          <h3 class="song__artist">
+            Rolex Rasathy feat. Navz 47
+          </h3>
+        </div>
+        <a class="play" href="https://www.youtube.com/watch?v=h2u0AmoIabE">
+          <img src="images/icons/play.svg" alt="Play">
+        </a>
+      </li>
+    </ol> -->
+
+    <input type="search" id="search" class="input" placeholder="Search by song or artist">
+
+    <ol id="app"></ol>
+  </main>
+</body>
+<script>
+  var app = document.querySelector('#app');
+  var mysongs = {};
+
+  function shuffle (array) {
+    var i = 0
+      , j = 0
+      , temp = null
+
+    for (i = array.length - 1; i > 0; i -= 1) {
+      j = Math.floor(Math.random() * (i + 1))
+      temp = array[i]
+      array[i] = array[j]
+      array[j] = temp
+    }
+  }
+
+  function compare(a,b) {
+    if (a.Song < b.Song)
+      return -1;
+    if (a.Song > b.Song)
+      return 1;
+    return 0;
+  }
+
+  var data = fetch('data/SongsList.json')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(myJson) {
+    mysongs = myJson;
+    render(myJson)
+  });
+
+  function render(songs) {
+    songs.sort(compare)
+
+      var c = songs.map((i) => {
+                    return `
+                    <li class="chart-post">
+                      <div class="avatar">
+                        <img src="${i.Avatar || 'https://placehold.it/48'}">
+                      </div>
+                      <div class="song__body">
+                        <h2 class="song__title">
+                          ${i.Song}
+                        </h2>
+                        <h3 class="song__artist">
+                          ${i.Artist}
+                        </h3>
+                      </div>
+                      <a class="play" href="${i.YouTube}">
+                        <img src="images/icons/play.svg" alt="Play">
+                      </a>
+                    </li>
+                    `
+                })
+
+      app.innerHTML = c.join('');
+  }
+
+  var searchInput = document.querySelector('#search');
+
+  searchInput.addEventListener('keyup', search, false)
+
+  function search(e) {
+    var d = mysongs.filter(song => {
+      return song.Song.toLowerCase().includes(e.target.value.toLowerCase()) || song.Artist.toLowerCase().includes(e.target.value.toLowerCase())
+      })
+      render(d);
+  }
+
+</script>
+</html>
