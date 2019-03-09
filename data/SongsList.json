@@ -286,5 +286,41 @@
     "Genre": "Pop",
     "Album": "",
     "Avatar": "images/artists/mallipooandthealwas.png"
+  },
+  {
+    "Song": "Thangamalare",
+    "Artist": "Jhanu",
+    "YouTube": "https://youtu.be/EOs8b6VFt74",
+    "SoundCloud": "",
+    "Genre": "Pop",
+    "Album": "",
+    "Avatar": "images/artists/mallipooandthealwas.png"
+  },
+  {
+    "Song": "Achamillai",
+    "Artist": "Jhanu",
+    "YouTube": "https://youtu.be/ziZG7qlSUVA",
+    "SoundCloud": "",
+    "Genre": "Pop",
+    "Album": "",
+    "Avatar": "images/artists/mallipooandthealwas.png"
+  },
+  {
+    "Song": "Odi Po",
+    "Artist": "Jhanu",
+    "YouTube": "https://youtu.be/U952vxVU2Uc",
+    "SoundCloud": "",
+    "Genre": "Pop",
+    "Album": "",
+    "Avatar": "images/artists/mallipooandthealwas.png"
+  },
+  {
+    "Song": "Arakkan",
+    "Artist": "Jhanu",
+    "YouTube": "https://youtu.be/X4QSxYf9EtU",
+    "SoundCloud": "",
+    "Genre": "Pop",
+    "Album": "",
+    "Avatar": "images/artists/mallipooandthealwas.png"
   }
 ]
