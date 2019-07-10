@@ -214,7 +214,6 @@
     var publicSpreadsheetUrl =
       "https://docs.google.com/spreadsheets/d/1QiBZakCHvqKrvLbIvNr4ukwLdBHiLgug5MZcrSdcEHI/pubhtml";
 
-    var songList = [];
 
     function init() {
       Tabletop.init({
@@ -269,7 +268,8 @@
         return `
                     <li class="chart-post">
                       <div class="avatar">
-                        <img src="${i.Avatar || "https://placehold.it/48"}">
+                        <img src="${`/images/artists` + i.Avatar ||
+                          "https://placehold.it/48"}">
                       </div>
                       <div class="song__body">
                         <h2 class="song__title">
