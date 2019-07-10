@@ -214,7 +214,6 @@
     var publicSpreadsheetUrl =
       "https://docs.google.com/spreadsheets/d/1QiBZakCHvqKrvLbIvNr4ukwLdBHiLgug5MZcrSdcEHI/pubhtml";
 
-
     function init() {
       Tabletop.init({
         key: publicSpreadsheetUrl,
@@ -268,7 +267,7 @@
         return `
                     <li class="chart-post">
                       <div class="avatar">
-                        <img src="${`/images/artists` + i.Avatar ||
+                        <img src=${"/images/artists" + i.Avatar ||
                           "https://placehold.it/48"}">
                       </div>
                       <div class="song__body">
