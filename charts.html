@@ -267,8 +267,11 @@
         return `
                     <li class="chart-post">
                       <div class="avatar">
-                        <img src="${"images/artists/" + i.Avatar ||
-                          "https://placehold.it/48"}">
+                        <img src="${
+                          i.Avatar
+                            ? "images/artists/" + i.Avatar
+                            : "https://placehold.it/48"
+                        }">
                       </div>
                       <div class="song__body">
                         <h2 class="song__title">
